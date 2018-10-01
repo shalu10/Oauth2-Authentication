@@ -31,10 +31,19 @@
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-mail</artifactId>
-    <version>1.5.13.RELEASE</version>
+
 </dependency>
 
-
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.nekohtml</groupId>
+			<artifactId>nekohtml</artifactId>
+			<version>1.9.21</version>
+		</dependency>
 	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -78,6 +87,11 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-security</artifactId>
 		 
+		</dependency>
+		<dependency>
+  			<groupId>com.nulab-inc</groupId>
+  			<artifactId>zxcvbn</artifactId>
+  			<version>1.2.3</version>
 		</dependency>
 
 		<dependency>
@@ -124,7 +138,13 @@
     <groupId>com.h2database</groupId>
     <artifactId>h2</artifactId>
     <scope>runtime</scope>
-</dependency>			
+</dependency>	
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>4.3.18.RELEASE</version>
+</dependency>		
 <!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
 <!-- <dependency>
     <groupId>org.springframework.security.oauth</groupId>

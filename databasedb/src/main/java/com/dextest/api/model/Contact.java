@@ -1,8 +1,10 @@
 package com.dextest.api.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +32,16 @@ public class Contact implements Serializable{
 	private String type;
 	
 	private String data;
+	
+	 @Column(name = "confirmation_token")
+	private String confirmationToken;
+	    
+	 @Column(name = "generate_otp")
+	private String generateOtp;
+	 
+	 private LocalDateTime createdAt;
+
+	 private LocalDateTime updatedAt;
 
 	public long getContactId() {
 		return contactId;
@@ -66,6 +78,40 @@ public class Contact implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public String getConfirmationToken() {
+		return confirmationToken;
+	}
+
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
+
+	public String getGenerateOtp() {
+		return generateOtp;
+	}
+
+	public void setGenerateOtp(String generateOtp) {
+		this.generateOtp = generateOtp;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	
 	
 
 }

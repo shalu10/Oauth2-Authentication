@@ -57,13 +57,15 @@ public class User implements UserDetails {
 	private String principalId;
 	
 		
-	private LocalDateTime created;
-
-	private LocalDateTime lastLogin;
-
+	
 	@Column(length = 61)
     private String password;
 	
+/*	@Column(name = "confirmation_token")
+	private String confirmationToken;
+	
+	private String generateOtp;
+	*/
 	
 	 @JsonBackReference
 	    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)    
@@ -73,10 +75,7 @@ public class User implements UserDetails {
 	    @ManyToMany(fetch = FetchType.EAGER)
 	    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
 	    private Collection<Role> roles;
-	 @JsonBackReference
-	    @ManyToMany(fetch = FetchType.EAGER)
-	    @JoinTable(name = "users_activations", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"), inverseJoinColumns = @JoinColumn(name = "activationId", referencedColumnName = "activationId"))
-	    private Set<Activation> activations=new HashSet<>(0);
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -159,29 +158,12 @@ public class User implements UserDetails {
 		
 		return enabled;
 	}
-	public Set<Activation> getActivations() {
-		return activations;
-	}
-	public void setActivations(Set<Activation> activations) {
-		this.activations = activations;
-	}
+	
 	public String getPrincipalId() {
 		return principalId;
 	}
 	public void setPrincipalId(String principalId) {
 		this.principalId = principalId;
-	}
-	public LocalDateTime getCreated() {
-		return created;
-	}
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
-	}
-	public LocalDateTime getLastLogin() {
-		return lastLogin;
-	}
-	public void setLastLogin(LocalDateTime lastLogin) {
-		this.lastLogin = lastLogin;
 	}
 	
 	

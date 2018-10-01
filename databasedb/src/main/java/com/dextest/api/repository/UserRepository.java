@@ -26,4 +26,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 	
 	/*@Query("SELECT u from User u where u.principalId=?1")	
 	User findByPrincipalId(String principalId);*/
+/*	@Query("SELECT u from User u where u.confirmationToken=?1")	
+	 User findByConfirmationToken(String confirmationToken);*/
 }

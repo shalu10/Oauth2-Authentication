@@ -33,7 +33,7 @@ public interface UserService {
 
 	PrincipalExtractor principalExtractor(UserRepository userRepository);
 
-
+	/* User findByConfirmationToken(String confirmationToken);*/
 
 	
 }

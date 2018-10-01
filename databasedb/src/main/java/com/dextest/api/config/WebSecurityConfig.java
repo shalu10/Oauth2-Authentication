@@ -45,7 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	.antMatchers("/login").permitAll()
 	.antMatchers("/oauth/token/revokeById/**").permitAll()
 	.antMatchers("/tokens/**").permitAll()	
-	.antMatchers("/google").permitAll()
+	.antMatchers("/user").permitAll()
+	.antMatchers("/confirm").permitAll()
 	.anyRequest().authenticated()
 	.and().formLogin().permitAll();
 	
@@ -64,18 +65,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	}*/
 
-	@Override
+	/*@Override
 	public void configure(WebSecurity web) throws Exception {
 	    web.ignoring().antMatchers("/v2/api-docs", "/configuration/**","/console/**", "/swagger-resources/**",  "/swagger-ui.html", "/webjars/**", "/api-docs/**");
-	}
-	@Bean
+	}*/
+	/*@Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
+	}*/
 	
 	@Override
     @Bean
