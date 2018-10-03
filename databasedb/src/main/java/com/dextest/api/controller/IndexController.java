@@ -39,12 +39,7 @@ public class IndexController {
 	@Autowired private UserRepository userRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	@RequestMapping("/confirm")
-	public ModelAndView showPage(ModelAndView modelAndView, User user){
-		modelAndView.addObject("user", user);
-		modelAndView.setViewName("confirm");
-		return modelAndView;
-	}	
+	
 	
 	
 	
@@ -91,7 +86,7 @@ public class IndexController {
 		if (user == null) { // No token found in DB
 			modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
 		} else { // Token found
-			modelAndView.addObject("confirmationToken", user.getConfirmationToken());
+			modelAndView.addObject("confirmationToken", contact.getConfirmationToken());
 		}
 			
 		modelAndView.setViewName("confirm");

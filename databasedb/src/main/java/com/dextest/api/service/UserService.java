@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.Principal
 
 import com.dextest.api.dto.RegisterDto;
 import com.dextest.api.dto.UserDto;
+import com.dextest.api.model.Contact;
 import com.dextest.api.model.User;
 import com.dextest.api.repository.UserRepository;
 
@@ -31,7 +32,9 @@ public interface UserService {
 	
 	User update(User user);
 
-	PrincipalExtractor principalExtractor(UserRepository userRepository);
+	
+
+	/*PrincipalExtractor principalExtractor(UserRepository userRepository);*/
 
 	/* User findByConfirmationToken(String confirmationToken);*/
 

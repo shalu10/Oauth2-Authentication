@@ -12,5 +12,5 @@ import com.dextest.api.model.Contact;
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 	
 	boolean findByData(String data); 
-	
+
 }

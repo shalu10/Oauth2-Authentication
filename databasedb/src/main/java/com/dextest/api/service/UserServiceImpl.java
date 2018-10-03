@@ -236,15 +236,15 @@ public class UserServiceImpl implements UserService{
 		
 		
 	}
-	@Override
+	/*@Override
 
 	@Bean
     public PrincipalExtractor principalExtractor(UserRepository userRepository) {
         return map -> {
-          /*  String principalId = (String) map.get("id");
+            String principalId = (String) map.get("id");
             User user = userRepository.findByPrincipalId(principalId);
             if (user == null) {
-                LOGGER.info("No user found, generating profile for {}", principalId);*/
+                LOGGER.info("No user found, generating profile for {}", principalId);
         	BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
                 User user = new User();
                 user.setPassword(passwordEncoder.encode((String) map.get("password")));
@@ -281,7 +281,9 @@ public class UserServiceImpl implements UserService{
         };
     
     
-}
+}*/
+
+	
 
 	/*@Override
 	public User findByConfirmationToken(String confirmationToken) {
