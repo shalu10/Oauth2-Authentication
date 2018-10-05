@@ -33,11 +33,7 @@ public class Contact implements Serializable{
 	
 	private String data;
 	
-	 @Column(name = "confirmation_token")
-	private String confirmationToken;
-	    
-	 @Column(name = "generate_otp")
-	private String generateOtp;
+	
 	 
 	 private LocalDateTime createdAt;
 
@@ -79,21 +75,7 @@ public class Contact implements Serializable{
 		return serialVersionUID;
 	}
 
-	public String getConfirmationToken() {
-		return confirmationToken;
-	}
-
-	public void setConfirmationToken(String confirmationToken) {
-		this.confirmationToken = confirmationToken;
-	}
-
-	public String getGenerateOtp() {
-		return generateOtp;
-	}
-
-	public void setGenerateOtp(String generateOtp) {
-		this.generateOtp = generateOtp;
-	}
+	
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

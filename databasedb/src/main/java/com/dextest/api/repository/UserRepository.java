@@ -24,8 +24,13 @@ public interface UserRepository extends JpaRepository<User, String> {
 	User findByMobile(String mobile);
 	
 	
-	/*@Query("SELECT u from User u where u.principalId=?1")	
-	User findByPrincipalId(String principalId);*/
-/*	@Query("SELECT u from User u where u.confirmationToken=?1")	
-	 User findByConfirmationToken(String confirmationToken);*/
+	@Query("SELECT u from User u where u.principalId=?1")	
+	User findByPrincipalId(String principalId);
+	
+	@Query("SELECT u from User u where u.confirmationToken=?1")	
+	 User findByConfirmationToken(String confirmationToken);
+	
+	@Query("SELECT u from User u where u.generateOtp=?1")	
+	 User findByGenerateOtp(String GenerateOtp);
+		
 }

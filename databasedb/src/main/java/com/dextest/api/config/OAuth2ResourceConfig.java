@@ -32,6 +32,7 @@ public class OAuth2ResourceConfig extends ResourceServerConfigurerAdapter {
 		http
 		.anonymous().and().authorizeRequests()
 		.antMatchers("/account/**").permitAll()
+		.antMatchers("/verify/**").permitAll()	
 		.antMatchers("/login").permitAll()
 		.antMatchers("/oauth/token/revokeById/**").permitAll()
 		.antMatchers("/tokens/**").permitAll()		

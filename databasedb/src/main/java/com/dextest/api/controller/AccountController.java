@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dextest.api.dto.RegisterDto;
+import com.dextest.api.dto.UserDto;
 import com.dextest.api.model.Contact;
 import com.dextest.api.model.User;
 import com.dextest.api.repository.UserRepository;
@@ -36,15 +37,7 @@ public class AccountController {
 	@GetMapping("/")
 	public String index() {
 		return "Connecting";	
-	}
-	
-	
-	/*@RequestMapping("/user")
-    public User user(@AuthenticationPrincipal User principal) {
-        return principal;
-    }*/
-
-		
+	}	
 	
 	@PostMapping("/register")
 	public ResponseEntity register(@RequestBody final RegisterDto dto){
@@ -58,14 +51,58 @@ public class AccountController {
 				.status(HttpStatus.CREATED)
 				.body("User Created Successfully");
 	}
+	@RequestMapping("/google/login")
+	public ResponseEntity<?> usersave(Principal principal) {
+		@SuppressWarnings("unchecked")
+		Map<String, Object> details = (Map<String, Object>) ((OAuth2Authentication) principal).getUserAuthentication().getDetails();
+		 UserDto userExists = userService.findByEmail((String) details.get("email"));
+	        if (userExists != null) {
+	        	return ResponseEntity
+						.status(HttpStatus.CONFLICT)
+						.body("This User Is Already Registered With US !!!");				
+				
+			} else {
+			/*	 BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();*/
+			User user = new User();
+			/*user.setPassword(passwordEncoder.encode((String)details.get("password")));*/
+	/*		user.setPassword(((String)details.get("password")));*/
+	        user.setFirstName((String)details.get("given_name"));
+	        user.setLastName((String)details.get("family_name"));
+	        user.setAvatar((String)details.get("picture"));
+	        user.setPrincipalId((String)details.get("id"));    
+	        user.setConfirmationToken((String)details.get("id"));
+	        user.setEnabled(true);
+	        Contact contact=new Contact();
+			if((String)details.get("email")!=null) {
+				if(ContactValidator.isValidEmailAddress((String)details.get("email"))) {
+					contact.setType("email");
+					contact.setData((String)details.get("email"));	
+					contact.setUserId(user);			
+				}else  {
+					return null;		
+				}
+			user.getContacts().add(contact);
+			
+	        userRepository.save(user);
+			}
+
+	        return ResponseEntity
+					.status(HttpStatus.CREATED)
+					.body("User Verified Successfully");	
+	        
+			}
+			
+	}
+		
+}
 	
 	
-	
+	/*
 	@RequestMapping({"/user","/me"})
 	public Map<String, String> usersave(Principal principal) {
 		Map<String, Object> details = (Map<String, Object>) ((OAuth2Authentication) principal).getUserAuthentication().getDetails();
 		Map<String, String> map = new LinkedHashMap();
-	   /* map.put("id",(String) details.get("id"));*/
+	    map.put("id",(String) details.get("id"));
         map.put("name", (String) details.get("name"));
         map.put("password", (String) details.get("password"));
         map.put("link", (String) details.get("link"));
@@ -73,17 +110,17 @@ public class AccountController {
         map.put("family name", (String) details.get("family_name"));
         map.put("photo", (String) details.get("picture"));
         map.put("enable", (String) details.get("true"));
-        /*BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();*/
+        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
 		User user = new User();
     
         user.setFirstName((String)details.get("given_name"));
         user.setLastName((String)details.get("family_name"));
-      /*  user.setLastLogin(LocalDateTime.now());*/
+        user.setLastLogin(LocalDateTime.now());
         user.setAvatar((String)details.get("picture"));
-      /*  user.setCreated(LocalDateTime.now());*/
+        user.setCreated(LocalDateTime.now());
         user.setEnabled(true);	
         user.setPrincipalId((String)details.get("id"));
-       /* user.setPassword(passwordEncoder.encode((String) details.get("password")));*/
+        user.setPassword(passwordEncoder.encode((String) details.get("password")));
         Contact contact=new Contact();
 		if((String)details.get("email")!=null) {
 			if(ContactValidator.isValidEmailAddress((String)details.get("email"))) {
@@ -107,7 +144,7 @@ public class AccountController {
 
 }
 	
-}
+}*/
 	
 	
 

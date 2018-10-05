@@ -23,7 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @PropertySource("application.properties")
 @EnableWebSecurity
 @Order(99)
-
+/*@EnableOAuth2Sso*/
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
@@ -45,38 +45,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	.antMatchers("/login").permitAll()
 	.antMatchers("/oauth/token/revokeById/**").permitAll()
 	.antMatchers("/tokens/**").permitAll()	
-	.antMatchers("/user").permitAll()
-	.antMatchers("/confirm").permitAll()
+	.antMatchers("/verify/**").permitAll()	
 	.anyRequest().authenticated()
 	.and().formLogin().permitAll();
 	
 }
-	/*http		
-	.anonymous().and().authorizeRequests()	
-	.antMatchers("/account/**").permitAll()
-	.antMatchers("/login").permitAll()
-	.antMatchers("/oauth/token/revokeById/**").permitAll()
-	.antMatchers("/tokens/**").permitAll()	
-	.antMatchers("/user").permitAll()
-	.anyRequest().authenticated()
-	.and().formLogin().permitAll()
-	.and().csrf().disable();
-		// @formatter:on        
 	
-	}*/
 
-	/*@Override
+	@Override
 	public void configure(WebSecurity web) throws Exception {
 	    web.ignoring().antMatchers("/v2/api-docs", "/configuration/**","/console/**", "/swagger-resources/**",  "/swagger-ui.html", "/webjars/**", "/api-docs/**");
-	}*/
-	/*@Bean
+	}
+	@Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}*/
+	}
 	
 	@Override
     @Bean

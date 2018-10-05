@@ -61,11 +61,11 @@ public class User implements UserDetails {
 	@Column(length = 61)
     private String password;
 	
-/*	@Column(name = "confirmation_token")
+	@Column(name = "confirmation_token")
 	private String confirmationToken;
 	
 	private String generateOtp;
-	*/
+	
 	
 	 @JsonBackReference
 	    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)    
@@ -164,6 +164,18 @@ public class User implements UserDetails {
 	}
 	public void setPrincipalId(String principalId) {
 		this.principalId = principalId;
+	}
+	public String getConfirmationToken() {
+		return confirmationToken;
+	}
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
+	public String getGenerateOtp() {
+		return generateOtp;
+	}
+	public void setGenerateOtp(String generateOtp) {
+		this.generateOtp = generateOtp;
 	}
 	
 	

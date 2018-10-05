@@ -2,6 +2,7 @@ package com.dextest.api.service;
 
 import java.io.BufferedReader;
 
+
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.mail.Message;
@@ -24,9 +24,6 @@ import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.dextest.api.dto.RegisterDto;
 import com.dextest.api.dto.UserDto;
@@ -150,7 +147,7 @@ public class UserServiceImpl implements UserService{
 				contact.setCreatedAt(LocalDateTime.now());
 				contact.setUpdatedAt(LocalDateTime.now());
 				user.setEnabled(false);	
-				contact.setConfirmationToken(UUID.randomUUID().toString());
+				user.setConfirmationToken(UUID.randomUUID().toString());
 				final String username = "dextestcreation@gmail.com";
 				final String password = "Shalini10@";
 		 
@@ -175,7 +172,7 @@ public class UserServiceImpl implements UserService{
 					message.setRecipients(Message.RecipientType.TO,
 						InternetAddress.parse(dto.getContact()));
 					message.setSubject("Registration Confirmation");
-					message.setText("To confirm your e-mail address, please click the link below:\n" + "http://localhost:9080" + "/confirm?token="+contact.getConfirmationToken());
+					message.setText("To confirm your e-mail address, please click the link below:\n" + "http://localhost:9085" + "/confirm?token="+user.getConfirmationToken());
 		 
 					Transport.send(message);
 		 					
@@ -190,19 +187,17 @@ public class UserServiceImpl implements UserService{
 				contact.setCreatedAt(LocalDateTime.now());
 				contact.setUpdatedAt(LocalDateTime.now());
 				user.setEnabled(false);	
-				char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
-				Random rnd = new Random();
-				StringBuilder sb = new StringBuilder((100000 + rnd.nextInt(900000)) + "-");
-				for (int i = 0; i < 5; i++)
-				    sb.append(chars[rnd.nextInt(chars.length)]);
-				contact.setGenerateOtp(sb.toString());
+				
 				
 				try {
+					int randomPIN = (int)(Math.random()*9000)+1000;
+					String pin = ""+randomPIN;
+					user.setGenerateOtp(pin);
 					// Construct data
-					String apiKey = "apikey=" + "Yn2BvW3C3fs-qmgn5rnhQKCdsTOjbsxoCAd0Ie4Lxj";
-					String message = "&message=" + "To verify your Mobile number, please enter the OTP number given below :\n" + contact.getGenerateOtp();
+					String apiKey = "apikey=" + "/Yn2BvW3C3fs-qmgn5rnhQKCdsTOjbsxoCAd0Ie4Lxj/";
+					String message = "&message=" + "To verify your Mobile number, please enter the OTP number given below :\n" + user.getGenerateOtp();
 					String sender = "&sender=" + "TXTLCL";
-					/*String otp = "&otp=" + "mt_rand(10000,9999)";*/
+				
 					String numbers = "&numbers=" + (dto.getContact());
 					
 					// Send data
@@ -283,10 +278,16 @@ public class UserServiceImpl implements UserService{
     
 }*/
 
-	
-
-	/*@Override
+	@Override
 	public User findByConfirmationToken(String confirmationToken) {
 		return userRepository.findByConfirmationToken(confirmationToken);
-	}*/
+	}
+
+	@Override
+	public User findByGenerateOtp(String GenerateOtp) {
+		return userRepository.findByGenerateOtp(GenerateOtp);
+	}
+
+	
+
 }

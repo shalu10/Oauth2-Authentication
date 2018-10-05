@@ -32,11 +32,13 @@ public interface UserService {
 	
 	User update(User user);
 
+	User findByConfirmationToken(String confirmationToken);
+
+	User findByGenerateOtp(String GenerateOtp);
+
 	
 
-	/*PrincipalExtractor principalExtractor(UserRepository userRepository);*/
-
-	/* User findByConfirmationToken(String confirmationToken);*/
+	
 
 	
 }

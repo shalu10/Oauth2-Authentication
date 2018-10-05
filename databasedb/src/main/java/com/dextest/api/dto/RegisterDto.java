@@ -7,7 +7,7 @@ public class RegisterDto {
 	private String lastName;
 	private String contact;
 	private String password;
-	
+	private String generateOtp;
 	
 	
 	public String getUsername() {
@@ -39,6 +39,12 @@ public class RegisterDto {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getGenerateOtp() {
+		return generateOtp;
+	}
+	public void setGenerateOtp(String generateOtp) {
+		this.generateOtp = generateOtp;
 	}
 	
 	
