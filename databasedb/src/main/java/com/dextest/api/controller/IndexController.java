@@ -24,7 +24,7 @@ import com.dextest.api.service.UserService;
 
 
 @RestController
-@RequestMapping("/verify")
+@RequestMapping("/api")
 public class IndexController {
 	
 	@Autowired
