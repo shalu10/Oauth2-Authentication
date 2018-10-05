@@ -30,9 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	
-
-
 @Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
@@ -52,10 +49,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 	
 
-	@Override
+	/*@Override
 	public void configure(WebSecurity web) throws Exception {
 	    web.ignoring().antMatchers("/v2/api-docs", "/configuration/**","/console/**", "/swagger-resources/**",  "/swagger-ui.html", "/webjars/**", "/api-docs/**");
-	}
+	}*/
 	@Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
